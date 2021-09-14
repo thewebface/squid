@@ -290,7 +290,9 @@ HttpHeader::skipUpdateHeader(const Http::HdrType id) const
         (id == Http::HdrType::WARNING) ||
         // TODO: Consider updating Vary headers after comparing the magnitude of
         // the required changes (and/or cache losses) with compliance gains.
-        (id == Http::HdrType::VARY);
+        (id == Http::HdrType::VARY) ||
+        // Optionally remove Content-Length headers sent by buggy servers (see bug 4882)
+        (id == Http::HdrType::CONTENT_LENGTH && Config.onoff.ignore_304_content_length);
 }
 
 void

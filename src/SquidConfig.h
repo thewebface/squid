@@ -298,6 +298,7 @@ public:
 #if USE_HTTP_VIOLATIONS
 
         int reload_into_ims;
+        int ignore_304_content_length;
 #endif
 
         int offline;
